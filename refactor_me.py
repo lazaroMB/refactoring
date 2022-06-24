@@ -1,41 +1,33 @@
+class Parent:
 
-
-
-class parenclass:
-
-    def GetFirstName(self, fullname):
-        return fullname.split(" ")[0]
+    def get_first_name(self, fullname):
+        return fullname.split(' ')[0]
 
     def hey(self, fullname):
-        print("Hello"+self.GetFirstName(fullname))
+        print(f'Hello {self.get_first_name(fullname)}')
 
 
-class Child_class(parenclass):
+class Child(Parent):
+    MAX_AGE = 18
 
-    def __init__(self, age=None):  
+    def __init__(self, age=18):  # No age is the same behavior that > 18
         self.age = age
 
     def hey(self, fullname):
-        if self.age and self.age < 18: 
-            print("What's up"+self.GetFirstName(fullname)+"?")
-            
-        elif self.age and self.age>18:
+        if not self.is_adult():
+            print(f"What's up {self.get_first_name(fullname)}?")
+        else:
             super().hey(fullname)
 
-        elif not self.age:
-            super().hey(fullname)
-
-if __name__ == "__main__":
+    def is_adult(self):  # age = 18 case is missing from original code
+        return self.age and self.age >= self.MAX_AGE
 
 
-    a = parenclass()    
+if __name__ == '__main__':
 
-    b = Child_class()   
-
-    c = Child_class(14)
-
-    a.hey("Alfredo Topete Escamilla")
-
-    b.hey("Alfredo Topete Escamilla")
-
-    c.hey("Alfredo Topete Escamilla")
+    a = Parent()
+    b = Child()
+    c = Child(14)
+    a.hey('Alfredo Topete Escamilla')
+    b.hey('Alfredo Topete Escamilla')
+    c.hey('Alfredo Topete Escamilla')
